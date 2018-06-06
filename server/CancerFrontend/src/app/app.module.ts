@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
 import { AppComponent } from './app.component';
-const config: SocketIoConfig = { url: 'http://localhost:3002', options: {} };
+const config: SocketIoConfig = { url: 'http://87.56.217.210/', options: {} };
 
 @NgModule({
   declarations: [

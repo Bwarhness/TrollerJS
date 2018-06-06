@@ -9,18 +9,30 @@ app.listen(3001, () => console.log('Example app listening on port 3001!'))
 var io = require('socket.io')(server);
 io.on('connection', function (client) {
     console.log("Connected")
-    client.on('connect', function () {
-        console.log("client connected")
-    });
-    client.on('event', function (data) {
-        io.emit('openUrl', "ost" )
-    });
-    client.on('disconnect', function () {
 
-    });
     client.on('openUrl', function(url) {
-    io.emit('url', url);
+        io.emit('url', url);
     })
+    client.on('killApplication', function(name) {
+        io.emit('killApplication', name);
+    })
+    client.on('changeVolume', function(volume) {
+        io.emit('changeVolume', volume);
+    })
+    client.on('say', function(speach) {
+        io.emit('say', speach);
+    })
+    client.on('powerOff', function() {
+        io.emit('powerOff');
+    })
+    client.on('notification', function (notification) {
+        io.emit('notification',notification.title, notification.message,
+        notification.sound, notification.time, notification.wait, notification.type);
+    });
+
+
+
+    
 });
 server.listen(3002);
 console.log("Socket IO listening on 3002!")

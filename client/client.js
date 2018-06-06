@@ -1,14 +1,15 @@
-var socket = require('socket.io-client')('http://localhost:3002');
+var socket = require('socket.io-client')('http://87.56.217.210/');
 
 
 socket.on('connect', function () {
     console.log("connected")
-    powerOff()
 });
 socket.on('url', function (url) {
     openUrl(url)
 });
 socket.on('say', function (speach) {
+    console.log(speach)
+    
     talk(speach);
 });
 socket.on('powerOff', function () {
@@ -18,6 +19,7 @@ socket.on('changeVolume', function (volume) {
     changeVolume(volume);
 });
 socket.on('notification', function (title, message, sound, time, wait, type) {
+    console.log("yo");
     notification(title, message, sound, time, wait, type);
 });
 socket.on('killApplication', function (applicationName) {
