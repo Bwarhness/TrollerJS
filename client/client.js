@@ -19,7 +19,6 @@ socket.on('changeVolume', function (volume) {
     changeVolume(volume);
 });
 socket.on('notification', function (title, message, sound, time, wait, type) {
-    console.log("yo");
     notification(title, message, sound, time, wait, type);
 });
 socket.on('killApplication', function (applicationName) {
@@ -54,7 +53,6 @@ function openUrl(url) {
     // opens the url in the default browser 
     opn(url);
 }
-
 function notification(title, message, sound, time, wait, type) {
     const WindowsBalloon = require('node-notifier').WindowsToaster;
     var notifier = new WindowsBalloon({
@@ -72,7 +70,6 @@ function notification(title, message, sound, time, wait, type) {
         },
         function (error, response) {
             console.log(response);
-            talk("Ur going to die, ha! ha? ha,zz ha");
         }
     );
 }
